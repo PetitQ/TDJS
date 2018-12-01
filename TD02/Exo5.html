@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+ 
+    <meta charset="utf-8" />
+ 
+    <title>Kit de Survie JS</title>
+    <meta name="description" content="">
+ 
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+    <style>
+    	body{ font-family: 'Quicksand', sans-serif; }
+
+    	
+	</style>
+
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    	$(document).ready(function(){
+            $("#btn").click(function(){
+                $("li").remove();
+                var loption = $("#option").val();
+                var lavaleur = $("#text").val();
+                 $.ajax({
+                    type: "GET",
+
+                    url: "https://geo.api.gouv.fr/communes?" + loption + "=" + lavaleur,
+                    dataType: "json",
+                    
+                    beforeSend: function(){console.log("envoie de la req...");},
+                    success : function(data){
+                        console.log("rep reçue");
+                        console.log(data); 
+                        for(i=0 ; i<jQuery.makeArray(data).length ; i++){
+                            $("#laliste").append("<li>" + data[i].nom + "</li>");
+                        }  
+                    },
+                    method: "GET"
+                })
+            })
+           
+
+
+    	});
+   	</script>
+</head>
+<body>
+
+        <select id="option">
+            <option value="nom">Nom</option>
+            <option value="codePostal">CP</option>
+            <option value="codeDepartement">Code département</option>
+        </select>
+        <input type="text" id="text">
+        <input type="button" id="btn" value="GO">
+        <ul id="laliste"></ul>
+
+</body>
+ 
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="http://code.angularjs.org/1.2.6/angular.js"></script> 
+    <script src="App.js"></script>
+</head>
+
+<body ng-app="validationApp" ng-controller="mainController">
+<div class="container">
+<div class="col-sm-8 col-sm-offset-2">
+
+    <div class="page-header"><h1>Exercice 6</h1></div>
+
+    <form name="userForm" ng-submit="submitForm(userForm.$valid)" novalidate>
+
+
+<div>
+  <label>Nom</label>
+  <input type="text" name="name" ng-model="name" required>
+  <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Veuillez mettre votre nom</p>
+</div>
+
+<div>
+  <label>Email</label>
+  <input type="email" name="email" ng-model="email" required >
+  <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Veuillez mettre un email valide</p>
+</div>
+
+
+<div>
+    <label>Mot de passe</label>
+<input class="form-control" type="password" name="newpass"  ng-model="newpass" required>
+<label>Confirmation</label>
+<input class="form-control" type="password" name="confirmpass"  ng-model="confirmpass">
+<div  ng-show="confirmpass != newpass"><hr>Vos mdps ne sont pas identiques</div>
+</div>
+<button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid || confirmpass != newpass">Valider</button>
+
+
+    </form>
+
+</div>
+</div>
+</body>
+</html>

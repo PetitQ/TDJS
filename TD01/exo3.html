@@ -1,0 +1,77 @@
+<!-- KIT DE SURVIE JS - IUT INFORMATIQUE BORDEAUX -->
+<!DOCTYPE html>
+<head>
+ 
+    <meta charset="utf-8" />
+ 
+    <title>Exercice 03</title>
+    <meta name="description" content="Description de la page">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+
+    <style>
+    	body{ font-family: 'Quicksand', sans-serif; }
+	</style>
+
+    <script src="jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+    	function start(){
+
+            function dayDiff(d1, d2)
+            {
+	            return new Number((d2.getTime() - d1.getTime()) / 31536000000).toFixed(0);
+            }
+
+            var personne = {
+                nom : "",
+                prenom :  "",
+                dateNaissance: [1,1,1997],
+
+
+                init: function (nom, prenom, dateNaissance){
+                    this.nom = nom;
+                    this.prenom = prenom;
+                    this.dateNaissance = dateNaissance;
+                },
+
+                decrire: function(){console.log("Je suis " + this.prenom + " " + this.nom
+                                                + " et je suis né le " + this.dt)},
+                
+                direAge : function(){
+                    birthday = new Date(this.dateNaissance);
+                    dtnow = new Date();
+                    //result = new Number((new Date().getTime() - birthday.getTime()) / 31536000000).toFixed(0);
+                    result = dayDiff(birthday, dtnow);
+                    console.log("j'ai : " + result + "ans");
+                }
+
+            }
+
+            var professeur = Object.create(personne);
+            professeur.mail = "rien@gmail.com";
+            professeur.initprofesseur = function(nom, prenom, dateNaissance, mail){
+                this.init(nom,prenom,dateNaissance);
+                this.mail = mail;
+            }
+
+            professeur.decrireprof = function(){
+                
+                console.log("Je suis " + this.prenom + " " + this.nom + " et je suis né le " 
+                + this.dateNaissance[0] + "/"
+                + this.dateNaissance[1] + "/"
+                + this.dateNaissance[2]
+                + " mon mail de professeur est : " + this.mail);
+            }
+
+            var prof1 = Object.create(professeur);
+            prof1.initprofesseur("bloup", "lalo", [03,12,170], "prof1@professeur.com");
+            prof1.decrireprof();
+            prof1.direAge();
+        }
+   	</script>
+</head>
+<body onload="start()">
+	
+
+</body>
+ 
+</html>
